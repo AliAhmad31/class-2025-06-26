@@ -1,0 +1,59 @@
+---
+title: "Race and Income"
+execute: 
+  echo: false
+  message: false
+---
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(plotly)
+
+x <- read_csv(
+  "https://raw.githubusercontent.com/PPBDS/primer.data/master/data-raw/nyc_tracts.csv",
+  show_col_types = FALSE) |> 
+    separate(tract, 
+             into = c("tract_full", "county", "state"), 
+             sep = "; ", 
+             remove = FALSE) |> 
+    mutate(county = str_trim(county),
+           borough = recode(county,
+                     "New York County" = "Manhattan",
+                     "Kings County" = "Brooklyn",
+                     "Queens County" = "Queens",
+                     "Bronx County" = "Bronx",
+                     "Richmond County" = "Staten Island"))
+
+```
+
+
+
+```{r}
+p <- ggplot(x, aes(
+  x = med_income,
+  y = race,
+  color = med_income,
+  text = tract_full
+)) +
+  geom_point(alpha = 0.8) +
+  scale_x_continuous(labels = scales::dollar_format()) +
+  scale_color_viridis_c(option = "plasma", direction = -1) +
+  facet_wrap(~borough, ncol = 1) +
+  labs(
+    x = "Median household income",
+    y = "Largest group in Census tract",
+    title = "Race and Income Across Census Tracts in New York City"
+  ) +
+  theme_minimal()
+
+# Convert to interactive plotly plot
+ggplotly(p, tooltip = "text")
+
+```
+
+
+The image is a vertically faceted scatter plot titled "Race and Income", subtitled "Race and Income Across Census Tracts in New York City." Each panel represents a NYC borough—Bronx, Brooklyn, Manhattan, Queens, and Staten Island—stacked top to bottom. The x-axis shows median household income (ranging from $0 to $250,000), while the y-axis displays the largest racial group in each tract: White, Hispanic, Black, or Asian.
+
+Dots on the plot represent individual census tracts, and they're color-coded by median income using a plasma color gradient—bright yellow for low incomes, shifting to deep purple for high incomes. This visual design helps expose income disparities across both racial groups and boroughs, spotlighting patterns like higher incomes concentrated among certain racial groups or neighborhoods.
