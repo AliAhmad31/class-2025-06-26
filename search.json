@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Race and Income",
+    "section": "",
+    "text": "The image is a vertically faceted scatter plot titled “Race and Income”, subtitled “Race and Income Across Census Tracts in New York City.” Each panel represents a NYC borough—Bronx, Brooklyn, Manhattan, Queens, and Staten Island—stacked top to bottom. The x-axis shows median household income (ranging from $0 to $250,000), while the y-axis displays the largest racial group in each tract: White, Hispanic, Black, or Asian.\nDots on the plot represent individual census tracts, and they’re color-coded by median income using a plasma color gradient—bright yellow for low incomes, shifting to deep purple for high incomes. This visual design helps expose income disparities across both racial groups and boroughs, spotlighting patterns like higher incomes concentrated among certain racial groups or neighborhoods."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Made by Ali Ahmad"
+  }
+]
